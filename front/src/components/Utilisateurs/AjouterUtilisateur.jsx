@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import './Utilisateurs.css';
 
 const AjouterUtilisateur = () => {
     const [nom, setNom] = useState('');
@@ -38,12 +39,12 @@ const AjouterUtilisateur = () => {
     };
 
     return (
-        <div>
-            <h1>Ajouter un utilisateur</h1>
+        <div className="container">
+            <h1 className="title">Ajouter un utilisateur</h1>
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nom:</label>
+                <div className="container">
+                    <label className="container">Nom:</label>
                     <input
                         type="text"
                         value={nom}
@@ -51,8 +52,8 @@ const AjouterUtilisateur = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Prénom:</label>
+                <div className="container">
+                    <label className="container">Prénom:</label>
                     <input
                         type="text"
                         value={prenom}
@@ -60,8 +61,8 @@ const AjouterUtilisateur = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Email:</label>
+                <div className="container">
+                    <label className="container">Email:</label>
                     <input
                         type="email"
                         value={email}
@@ -69,8 +70,8 @@ const AjouterUtilisateur = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Mot de passe:</label>
+                <div className="container">
+                    <label className="container">Mot de passe:</label>
                     <input
                         type="password"
                         value={motDePasse}
@@ -78,7 +79,7 @@ const AjouterUtilisateur = () => {
                         required
                     />
                 </div>
-                <button type="submit">Ajouter</button>
+                <button type="submit" className="button">Ajouter</button>
             </form>
         </div>
     );

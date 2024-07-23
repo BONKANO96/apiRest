@@ -5,7 +5,6 @@ import Livres from './components/Livres/Livres';
 import AjouterUtilisateur from './components/Utilisateurs/AjouterUtilisateur';
 import DeleteUtilisateur from './components/Utilisateurs/DeleteUtilisateur';
 import UpdateUtilisateur from './components/Utilisateurs/UpdateUtilisateur';
-import { UserProvider } from './components/UserContext';
 /*
 import Categories from './components/Categories/Categories';
 import Emprunts from './components/Emprunts/Emprunts';

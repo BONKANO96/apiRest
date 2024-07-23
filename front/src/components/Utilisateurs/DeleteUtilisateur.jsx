@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Utilisateurs.css';
 
 const DeleteUtilisateur = () => {
     const [id, setId] = useState('');
@@ -20,12 +21,12 @@ const DeleteUtilisateur = () => {
     };
 
     return (
-        <div>
-            <h1>Supprimer un utilisateur</h1>
+        <div className="container">
+            <h1 className="title">Supprimer un utilisateur</h1>
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>ID de l'utilisateur:</label>
+                <div className="container">
+                    <label className="container">ID de l'utilisateur:</label>
                     <input
                         type="text"
                         value={id}
@@ -33,7 +34,7 @@ const DeleteUtilisateur = () => {
                         required
                     />
                 </div>
-                <button type="submit">Supprimer</button>
+                <button type="submit" className="button">Supprimer</button>
             </form>
         </div>
     );

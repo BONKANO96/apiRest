@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Utilisateurs.css';
 
 const UpdateUtilisateur = () => {
     const [id, setId] = useState('');
@@ -29,12 +30,12 @@ const UpdateUtilisateur = () => {
     };
 
     return (
-        <div>
-            <h1>Modifier un utilisateur</h1>
+        <div className="container">
+            <h1 className="title">Modifier un utilisateur</h1>
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>ID de l'utilisateur:</label>
+                <div className="container">
+                    <label className="container">ID de l'utilisateur:</label>
                     <input
                         type="text"
                         value={id}
@@ -42,39 +43,39 @@ const UpdateUtilisateur = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Nom:</label>
+                <div className="container">
+                    <label className="container">Nom:</label>
                     <input
                         type="text"
                         value={nom}
                         onChange={(e) => setNom(e.target.value)}
                     />
                 </div>
-                <div>
-                    <label>Prénom:</label>
+                <div className="container">
+                    <label className="container">Prénom:</label>
                     <input
                         type="text"
                         value={prenom}
                         onChange={(e) => setPrenom(e.target.value)}
                     />
                 </div>
-                <div>
-                    <label>Email:</label>
+                <div className="container">
+                    <label className="container">Email:</label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div>
-                    <label>Mot de passe:</label>
+                <div className="container">
+                    <label className="container">Mot de passe:</label>
                     <input
                         type="password"
                         value={motDePasse}
                         onChange={(e) => setMotDePasse(e.target.value)}
                     />
                 </div>
-                <button type="submit">Modifier</button>
+                <button type="submit" className="button">Modifier</button>
             </form>
         </div>
     );

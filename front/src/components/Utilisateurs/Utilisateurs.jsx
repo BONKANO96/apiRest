@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import './Utilisateurs.css'; // Assurez-vous que le chemin est correct
+
 const Utilisateurs = () => {
     const [utilisateurs, setUtilisateurs] = useState([]);
     const [records, setRecords] = useState([]);
@@ -9,16 +11,19 @@ const Utilisateurs = () => {
     useEffect(() => {
       axios.get('http://localhost:3000/Utilisateurs')
       .then(res => {
-        setUtilisateurs(Object.keys(res.data[0]).slice(0, 4))
-        setRecords(res.data)
+        setUtilisateurs(Object.keys(res.data[0]).slice(0, 4));
+        setRecords(res.data);
       })
+      .catch(err => {
+        console.error('Erreur lors de la récupération des utilisateurs', err);
+      });
     }, []);
 
     return (
-        <div>
-            <h1>Liste des Utilisateurs</h1>
-            <button onClick={() => navigate('/ajouter-utilisateur')}>Ajouter un utilisateur</button>
-            <table>
+        <div className="container">
+            <h1 className="title">Liste des Utilisateurs</h1>
+            <button className="button" onClick={() => navigate('/ajouter-utilisateur')}>Ajouter un utilisateur</button>
+            <table className="table">
                 <thead>
                     <tr>
                       {utilisateurs.map((c, i) => (
@@ -35,8 +40,8 @@ const Utilisateurs = () => {
                           <td>{d.prenom}</td>
                           <td>{d.email}</td>
                           <td>
-                            <button onClick={() => navigate('/supprimer-utilisateur')}>Supprimer un utilisateur</button>
-                            <button onClick={() => navigate('/modifier-utilisateur')}>Modifier un utilisateur</button>
+                            <button className="button" onClick={() => navigate(`/supprimer-utilisateur`)}>Supprimer</button>
+                            <button className="button" onClick={() => navigate(`/modifier-utilisateur}`)}>Modifier</button>
                           </td>
                         </tr>
                     ))}
