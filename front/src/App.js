@@ -1,7 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Utilisateurs from './components/Utilisateurs/Utilisateurs';
-import Livres from './components/Livres/Livres';/*
+import Livres from './components/Livres/Livres';
+import AjouterUtilisateur from './components/Utilisateurs/AjouterUtilisateur';
+import DeleteUtilisateur from './components/Utilisateurs/DeleteUtilisateur';
+import UpdateUtilisateur from './components/Utilisateurs/UpdateUtilisateur';
+import { UserProvider } from './components/UserContext';
+/*
 import Categories from './components/Categories/Categories';
 import Emprunts from './components/Emprunts/Emprunts';
 import Commentaires from './components/Commentaires/Commentaires';
@@ -18,7 +23,9 @@ function App() {
         <Routes>
           <Route path="/utilisateurs" element={<Utilisateurs />} />
           <Route path="/livres" element={<Livres />} />
-          
+          <Route path="/ajouter-utilisateur" element={<AjouterUtilisateur />} />
+          <Route path="/supprimer-utilisateur" element={<DeleteUtilisateur />} />
+          <Route path="/modifier-utilisateur" element={<UpdateUtilisateur />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
