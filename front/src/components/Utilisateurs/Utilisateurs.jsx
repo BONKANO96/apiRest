@@ -1,33 +1,43 @@
-// src/components/Utilisateurs/Utilisateurs.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Utilisateurs = () => {
-  const [utilisateurs, setUtilisateurs] = useState([]);
+    const [utilisateurs, setUtilisateurs] = useState([]);
+    const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    fetchUtilisateurs();
-  }, []);
+    useEffect(() => {
+      axios.get('http://localhost:3000/Utilisateurs')
+      .then(res => {
+        setUtilisateurs(Object.keys(res.data[0]))
+        setRecords(res.data)
+      })
+    }, []);
 
-  const fetchUtilisateurs = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/utilisateurs');
-      setUtilisateurs(response.data);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des utilisateurs:', error);
-    }
-  };
-
-  return (
-    <div>
-      <h2>Liste des utilisateurs</h2>
-      <ul>
-        {utilisateurs.map(utilisateur => (
-          <li key={utilisateur.id}>{utilisateur.nom} {utilisateur.prénom}</li>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Liste des Utilisateurs</h1>
+            <table>
+                <thead>
+                    <tr>
+                      {utilisateurs.map((c, i) => (
+                        <th key={i}>{c}</th>
+                      ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {records.map((d, i) => (
+                        <tr key={i}>
+                          <td>{d.id}</td>
+                          <td>{d.nom}</td>
+                          <td>{d.prenom}</td>
+                          <td>{d.email}</td>
+                            <td>{new Date(d.date_inscription).toLocaleDateString()}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 };
 
 export default Utilisateurs;

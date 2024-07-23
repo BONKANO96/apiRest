@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 
 const app = express();
+app.use(cors()); // Permet les requêtes depuis n'importe quel domaine
 const port = 3000;
 
 // Middleware pour parser le corps des requêtes
