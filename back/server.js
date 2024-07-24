@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 app.use(cors()); // Permet les requêtes depuis n'importe quel domaine
@@ -17,7 +18,7 @@ const sequelize = new Sequelize('my_library', 'my_libraryUser', '1234', {
     dialect: 'postgres'
 });
 
-
+app.use('/login', userRoutes);
 app.get('/utilisateurs', async (req, res) => {
     try {
         const [results, metadata] = await sequelize.query("SELECT * FROM \"Utilisateurs\"");
@@ -68,6 +69,39 @@ app.post('/utilisateurs', async (req, res) => {
         } else {
             res.status(500).json({ message: err.message });
         }
+    }
+});
+
+const jwtSecret = process.env.JWT_SECRET || 'votre_secret_jwt';
+
+app.post('/connexion', async (req, res) => {
+    try {
+        const { email, mot_de_passe } = req.body;
+        const utilisateur = await Utilisateur.findOne({ where: { email } });
+        if (utilisateur && await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe)) {
+            const token = jwt.sign({ id: utilisateur.id }, jwtSecret, { expiresIn: '1h' });
+            res.status(200).json({ message: 'Connexion réussie', token });
+        } else {
+            res.status(401).json({ error: 'Email ou mot de passe invalide' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la connexion' });
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const user = await User.findOne({ where: { email } });
+      if (user && await bcrypt.compare(password, user.password)) {
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful', token });
+      } else {
+        res.status(401).json({ error: 'Invalid email or password' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Error logging in' });
     }
 });
 

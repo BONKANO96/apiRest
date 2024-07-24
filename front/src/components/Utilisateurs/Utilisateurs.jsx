@@ -23,6 +23,7 @@ const Utilisateurs = () => {
         <div className="container">
             <h1 className="title">Liste des Utilisateurs</h1>
             <button className="button" onClick={() => navigate('/ajouter-utilisateur')}>Ajouter un utilisateur</button>
+            <button className="button" onClick={() => navigate('/login')}>Connectez vous!</button>
             <table className="table">
                 <thead>
                     <tr>
